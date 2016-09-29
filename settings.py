@@ -1,14 +1,16 @@
 import cv2
 
-def changeBrillo(x):
-    brillo = cv2.getTrackbarPos('brillo','image')
-    brillo = (brillo - 0)/(255 - 0)
-    cap.set(10,brillo)
+def changeBrightness(x):
+    brightness = cv2.getTrackbarPos('brightness','image')
+    brightness = (brightness - 0)/(255 - 0)
+    print(brightness)
+    cap.set(10,brightness)
 
-def changeContraste(x):
-    brillo = cv2.getTrackbarPos('contraste','image')
-    brillo = (brillo - 0)/(255 - 0)
-    cap.set(10,brillo)
+def changeContrast(x):
+    contrast = cv2.getTrackbarPos('contrast','image')
+    contrast = (contrast - 0)/(255 - 0)
+    print(contrast)
+    cap.set(11,contrast)
     
 cv2.namedWindow('image')
 cap = cv2.VideoCapture(0)
@@ -24,9 +26,11 @@ print("SATURATION", cap.get(12))
 print("GAIN", cap.get(14))
 print("FOCUS", cap.get(28))
 # create trackbars for color change
-cv2.createTrackbar('brillo','image',0,255,changeBrillo)
-cv2.createTrackbar('contraste','image',0,255,nothing)
-cv2.createTrackbar('B','image',0,255,nothing)
+#get current brightness and contrast values
+bright = int(round(cap.get(10) * 255));
+contra = int(round(cap.get(11) * 255));
+cv2.createTrackbar('brightness','image',bright,255,changeBrightness)
+cv2.createTrackbar('contrast','image',contra,255,changeContrast)
 
 while(True):
     # Capture frame-by-frame
